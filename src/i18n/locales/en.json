@@ -1,0 +1,47 @@
+{
+  "nav": {
+    "transactions": "Transactions",
+    "balance": "Balance",
+    "tokenTransactions": "Token transactions"
+  },
+  "home": {
+    "transactions": "Transactions"
+  },
+  "input": {
+    "walletAdress": "Wallet adress",
+    "fetch": "Fetch transactions",
+    "startBlock": "Start block",
+    "date": "Selected date",
+    "fetchBalance": "Fetch balance"
+  },
+  "table": {
+    "from": "From",
+    "to": "To",
+    "ethAmount": "Eth amount",
+    "blockNumber": "Block number",
+    "txHash": "Hash",
+    "timestamp": "Timestamp",
+    "transactionsPerPage": "Transactions per page : ",
+    "page": "Page : ",
+    "hash": "Hash",
+    "timeStamp": "Timestamp",
+    "value": "Eth amount"
+  },
+  "snackbar": {
+    "close": "Close"
+  },
+  "error": {
+    "fetchFailed": "Fetch failed",
+    "invalidInput": "Invalid input"
+  },
+  "success": {
+    "fetchSuccess": "Successfully fetched data"
+  },
+  "transactions": {
+    "count": "Transactions count:"
+  },
+  "balance": {
+    "ethBalance": "Eth balance : ",
+    "title": "Balance"
+  }
+}
