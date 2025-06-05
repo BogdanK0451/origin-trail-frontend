@@ -8,6 +8,7 @@
           </v-card-title>
         </v-col>
       </v-row>
+
       <v-row class="mx-5">
         <v-col>
           <v-form @submit.prevent="debouncedHandleClick">
@@ -31,51 +32,73 @@
                   placeholder="YYYY-MM-DD"
                   @click:clear="date = null">
                   <template #append-inner>
-                    <v-menu v-model="dateMenu" location="end" :close-on-content-click="false">
+                    <v-menu
+                      v-model="dateMenu"
+                      location="end"
+                      :close-on-content-click="false">
                       <template #activator="{props}">
                         <v-icon v-bind="props" class="ml-2">
                           mdi-calendar
                         </v-icon>
                       </template>
-                      <v-date-picker v-model="date" :max="yesterday" @update:model-value="dateMenu = false" />
+                      <v-date-picker
+                        v-model="date"
+                        :max="yesterday"
+                        @update:model-value="dateMenu = false" />
                     </v-menu>
                   </template>
                 </v-text-field>
               </v-col>
               <v-col cols="2" class="d-flex align-center">
                 <v-btn type="submit" color="primary" block>
-                  {{ $t('input.fetch') }}
+                  {{ $t('input.fetchBalance') }}
                 </v-btn>
               </v-col>
             </v-row>
           </v-form>
         </v-col>
       </v-row>
+
       <v-row class="mx-5">
         <v-col class="pt-0 pb-0">
           <v-divider />
         </v-col>
       </v-row>
+
       <v-row class="mx-5">
         <v-col class="pt-0">
           <v-progress-linear
             indeterminate
             :style="{display: 'block'}"
             color="primary"
-            :class="{'showBar': !isLoading}" />
+            :class="{showBar: !isLoading}" />
         </v-col>
       </v-row>
-      <v-row class="mx-5">
-        <v-col>
-          <v-card>
-            <v-card-text>
-              <v-row>
-                <v-col>
-                  <h3>{{ $t('balance.ethBalance') }}: {{ ethBalance }} ETH</h3>
-                </v-col>
-              </v-row>
-            </v-card-text>
-          </v-card>
+
+      <v-row v-if="lastAddress" class="mx-5 mb-3">
+        <v-col cols="auto">
+          <v-icon start icon="mdi-wallet" class="mr-2" />
+          <v-chip
+            color="primary" variant="tonal" class="text-body-2"
+            label>
+            {{ $t('input.walletAdress') }}: {{ lastAddress }}
+          </v-chip>
+        </v-col>
+        <v-col v-if="lastDate" cols="auto">
+          <v-icon start icon="mdi-calendar" class="mr-2" />
+          <v-chip
+            color="primary" variant="tonal" class="text-body-2"
+            label>
+            {{ $t('input.date') }}: {{ lastDate }}
+          </v-chip>
+        </v-col>
+        <v-col cols="auto">
+          <v-icon start icon="mdi-ethereum" class="mr-2" />
+          <v-chip
+            color="primary" variant="elevated" class="text-body-2"
+            label>
+            {{ $t('balance.ethBalance') }}: {{ ethBalance }} ETH
+          </v-chip>
         </v-col>
       </v-row>
     </v-card>
@@ -101,6 +124,9 @@ const date: Ref<Date | null> = ref(yesterday)
 const dateMenu = ref(false)
 const ethBalance = ref('0')
 
+const lastAddress = ref('')
+const lastDate = ref('')
+
 const formattedDate = computed(() => {
   if (!date.value) {
     return ''
@@ -121,6 +147,8 @@ async function handleClick() {
   try {
     const balance = await fetchBalance(address.value, formattedDate.value)
     ethBalance.value = balance
+    lastAddress.value = address.value
+    lastDate.value = formattedDate.value
     showSnackbar('green', t('success.fetchSuccess'))
   } catch (err) {
     showSnackbar('red', t('error.fetchFailed'))

@@ -9,17 +9,17 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView, // Form for wallet address, start block; displays transactions
+      component: HomeView,
     },
     {
       path: '/balance',
       name: 'balance',
-      component: BalanceView, // Form for wallet address, date; shows ETH balance
+      component: BalanceView,
     },
     {
       path: '/tokentransactions',
       name: 'tokentransactions',
-      component: TokenTransactionsView, // Displays token transactions
+      component: TokenTransactionsView,
     },
   ],
 })
