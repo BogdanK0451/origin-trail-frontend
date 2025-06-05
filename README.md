@@ -71,11 +71,11 @@ git clone https://github.com/BogdanK0451/origin-trail-backend.git
 pnpm install
 ```
 
-3. Start the development server (frontend)
+3. Start the development server (frontend) ( it will by default run on port 4000)
 ```bash
 pnpm dev
 ```
-4. Start the development server (backend)
+4. Start the development server (backend) (it will by default run on port 3000)
 ```bash
 pnpm start
 ```
