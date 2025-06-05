@@ -123,7 +123,7 @@ pnpm start
 
 ## 🔑 API Keys
 
-To use this application, you'll need:
+To use this application, you'll need API keys (but i've already set the values in code):
 
 1. Etherscan API Key
    - Register at https://etherscan.io/apis
@@ -136,9 +136,10 @@ To use this application, you'll need:
    - Add it to the `.env.development` file in the backend repo
 
 
+
 ## Thoughts
-    - Had some issues with etherscan api when i wanted to use ethereum json rpc eth_getBalanced for historical balance checking (it should be available but ..it didn't work), so i had to use infura api (after, first, getting the closest blockchain block to the date-time specified by the user)
-    - Wasn't sure if dealing with the timezone was important, so i just took the users timezone date-time and cut the time off. 
-    - Had issues with CORS on vercel, so i just let requests from all origins in, even though i wouldn't do that in practice.
-    - Api keys shouldn't be exposed like that on the backend..but for the sake of saving time they're public on github.
-    - Didn't setup an linter and husky/commitlint on backend, for the sake of saving time.
+- I initially encountered issues using the Etherscan API for historical balance checks via eth_getBalance. Although it should support this, it didn't work as expected so I switched to Infura, (first fetching the closest block to the user-specified date and time, ofcourse).
+- I wasn't certain whether timezone accuracy was critical, so I simply used the user's local date and discarded the time portion.
+- CORS issues arose on Vercel, so I allowed all origins, something I wouldn’t do in a production setting.
+- API keys are currently exposed in the backend for speed and convenience, but this is obviously not best practice and wouldn't be acceptable in a real-world scenario.
+- I skipped setting up linting and Husky/Commitlint on the backend to save time.
